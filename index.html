@@ -848,13 +848,15 @@ function closeDownload(e) {
 
 function drawShareCanvas() {
   const canvas = document.getElementById('share-canvas');
-  // Use a fixed pixel size for the card preview (not dpr scaled for display)
+  // High-res: draw at 3x, display scaled down via CSS for sharpness
+  const SCALE = 3;
   const W = 320, H = 560;
   canvas.style.width = '100%';
   canvas.style.height = 'auto';
-  canvas.width = W;
-  canvas.height = H;
+  canvas.width = W * SCALE;
+  canvas.height = H * SCALE;
   const ctx = canvas.getContext('2d');
+  ctx.scale(SCALE, SCALE);
 
   // Background
   const grad = ctx.createLinearGradient(0, 0, W, H);
